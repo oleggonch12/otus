@@ -60,3 +60,21 @@ def test_positive_circle(radius, area):
 def test_negative_circle(radius, area):
     with pytest.raises(ValueError):
         Circle(radius, "Circle")
+
+
+@pytest.mark.parametrize(("side_a", "area"),
+                         [(4, 16),
+                          (4.5, 20.25)],
+                         ids=["integer", "float"])
+def test_positive_square(side_a, area):
+    r = Square(side_a, "Square")
+    assert r.get_area() == area
+
+
+@pytest.mark.parametrize(("side_a", "area"),
+                         [(-4, 16),
+                          (-4.5, 20.25)],
+                         ids=["integer", "float"])
+def test_negative_square(side_a, area):
+    with pytest.raises(ValueError):
+        Square(side_a, "Square")
