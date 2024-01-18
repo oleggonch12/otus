@@ -35,11 +35,10 @@ def test_positive_triangle(side_a, side_b, side_c, area):
     assert r.get_area() == area
 
 
-# @pytest.mark.parametrize(("side_a", "side_b", "area"),
-#                          [(-4, -5, 20),
-#                           (-4, 5, -20),
-#                           (4, -5, -20)],
-#                          ids=["first_negative", "second_negative", "third_negative"])
-# def test_negative_rectangle(side_a, side_b, area):
-#     with pytest.raises(ValueError):
-#         Rectangle(side_a, side_b, "Rectangle")
+@pytest.mark.parametrize(("side_a", "side_b", "side_c", "area"),
+                         [(-4, -5, 3, 6),
+                          (-4.5, -5.5, -3.5, -7.85)],
+                         ids=["integer", "float"])
+def test_negative_triangle(side_a, side_b, side_c, area):
+    with pytest.raises(ValueError):
+        Triangle(side_a, side_b, side_c, "Triangle")
