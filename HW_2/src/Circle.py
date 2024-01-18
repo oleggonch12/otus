@@ -13,7 +13,7 @@ class Circle(Figure):
         """
         Вычисляем площадь круга
         """
-        return math.pi*self.radius**2
+        return round(math.pi*self.radius**2,2)
 
     def get_perimetr(self):
         """
