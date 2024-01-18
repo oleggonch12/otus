@@ -51,3 +51,12 @@ def test_negative_triangle(side_a, side_b, side_c, area):
 def test_positive_circle(radius, area):
     r = Circle(radius, "Circle")
     assert r.get_area() == area
+
+
+@pytest.mark.parametrize(("radius", "area"),
+                         [(-4, 50.27),
+                          (-4.5, 63.62)],
+                         ids=["integer", "float"])
+def test_negative_circle(radius, area):
+    with pytest.raises(ValueError):
+        Circle(radius, "Circle")
