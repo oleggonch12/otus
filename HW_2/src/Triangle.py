@@ -16,10 +16,10 @@ class Triangle(Figure):
         """
         Вычисляем площадь треугольника
         """
-        return math.sqrt(self.get_perimetr() *
+        return round(math.sqrt(self.get_perimetr() *
                          (self.get_perimetr()-self.side_a) *
                          (self.get_perimetr() - self.side_b) *
-                         (self.get_perimetr() - self.side_c))
+                         (self.get_perimetr() - self.side_c)),2)
 
     def get_perimetr(self):
         """
