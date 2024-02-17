@@ -42,7 +42,7 @@ class BaseRequest:
     def get(self, endpoint, endpoint_id, expected_error=False):
         url = f'{self.base_url}/{endpoint}/{endpoint_id}'
         response = self._request(url, 'GET', expected_error=expected_error)
-        return response.json()
+        return response
 
     def post(
             self, endpoint, endpoint_id, body, is_json=False,

@@ -7,13 +7,13 @@ def pet_api_user():
     return DogApi("https://dog.ceo/api")
 
 
-@pytest.mark.parametrize("breed", ["breed/african", "breed/doberman", "breed/gaddi-indian"])
-def get_dog_by_breed(pet_api_user, breed):
-    dog_response = pet_api_user.get_data(breed, '/images/random')
-    assert dog_response.status_code == "200"
+@pytest.mark.parametrize("breed", ["breed/african", "breed/doberman", "breed/affenpinscher"])
+def test_get_dog_by_breed(pet_api_user, breed):
+    dog_response = pet_api_user.get_data(breed, 'images/random')
+    assert dog_response.status_code == 200
 
 
-def get_list_of_breeds(pet_api_user):
+def test_get_list_of_breeds(pet_api_user):
     expected_body = {
         "message": {
             "affenpinscher": [],
@@ -231,19 +231,20 @@ def get_list_of_breeds(pet_api_user):
         },
         "status": "success"
     }
-    dog_list_response = pet_api_user.get_data("breeds", "list/all")
+    dog_list_response = pet_api_user.get_data("breeds", "list/all").json()
     for key, value in expected_body.items():
         assert dog_list_response[key] == value, (
             f'[{key}] Actual value: {dog_list_response[key]}, expected: {value}'
         )
 
 
-def get_random_image(pet_api_user):
+def test_get_random_image(pet_api_user):
     random_image_response = pet_api_user.get_data("breeds", "image/random")
-    assert random_image_response.status_code == "200"
+    assert random_image_response.status_code == 200
 
-## Non-parametrized test
-def get_list_of_sub_breeds(pet_api_user):
+
+# Non-parametrized test
+def test_get_list_of_sub_breeds(pet_api_user):
     expected_body = {
         "message": [
             "afghan",
@@ -256,14 +257,14 @@ def get_list_of_sub_breeds(pet_api_user):
         ],
         "status": "success"
     }
-    dog_list_response = pet_api_user.get_data("breed", "hound/list")
+    dog_list_response = pet_api_user.get_data("breed", "hound/list").json()
     for key, value in expected_body.items():
         assert dog_list_response[key] == value, (
             f'[{key}] Actual value: {dog_list_response[key]}, expected: {value}'
         )
 
 
-## Parametrized test
+# Parametrized test
 @pytest.mark.parametrize("breed,expected_result", [("hound", {'message': ['afghan', 'basset', 'blood', 'english',
                                                                           'ibizan', 'plott', 'walker'],
                                                               'status': 'success'}),
@@ -277,8 +278,8 @@ def get_list_of_sub_breeds(pet_api_user):
                                                                             'toy', 'welsh', 'westhighland', 'wheaten',
                                                                             'yorkshire'],
                                                                 'status': 'success'})])
-def get_list_of_sub_breeds(pet_api_user, breed, expected_result):
-    dog_list_response = pet_api_user.get_data("breed", breed+"/list")
+def test_get_list_of_sub_breeds_parametrized(pet_api_user, breed, expected_result):
+    dog_list_response = pet_api_user.get_data("breed", breed+"/list").json()
     for key, value in expected_result.items():
         assert dog_list_response[key] == value, (
             f'[{key}] Actual value: {dog_list_response[key]}, expected: {value}'
