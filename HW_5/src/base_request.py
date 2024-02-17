@@ -1,7 +1,8 @@
 import requests
-import pprint
+
 
 class BaseRequest:
+
     def __init__(self, base_url):
         self.base_url = base_url
         # set headers, authorisation etc
@@ -10,7 +11,7 @@ class BaseRequest:
             self, url, request_type, payload=None, is_json=False,
             expected_error=False
     ):
-        pprint.pprint(f'Request to: {url}')
+        print(f'Request to: {url}')
         stop_flag = False
         while not stop_flag:
             if request_type == 'GET':
@@ -29,13 +30,13 @@ class BaseRequest:
                 stop_flag = True
 
         # log part
-        pprint.pprint(f'{request_type} example')
-        pprint.pprint(response.url)
-        pprint.pprint(response.status_code)
-        pprint.pprint(response.reason)
-        pprint.pprint(response.text)
-        pprint.pprint(response.json())
-        pprint.pprint('**********')
+        print(f'{request_type} example')
+        print(response.url)
+        print(response.status_code)
+        print(response.reason)
+        print(response.text)
+        print(response.json())
+        print('**********')
         return response
 
     def get(self, endpoint, endpoint_id, expected_error=False):
