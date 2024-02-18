@@ -7,3 +7,12 @@ class Api(BaseRequest):
 
     def get_data(self, endpoint, endpoint_id):
         return self.get(endpoint, endpoint_id)
+
+    def put_data(self, endpoint, endpoint_id, data):
+        return self.put(endpoint, endpoint_id, data, is_json=True, expected_error=False)
+
+    def patch_data(self, endpoint, endpoint_id, data):
+        return self.patch(endpoint,endpoint_id, data, is_json=True, expected_error=False)
+
+    def delete_data(self, endpoint, endpoint_id):
+        return self.delete(endpoint, endpoint_id)
