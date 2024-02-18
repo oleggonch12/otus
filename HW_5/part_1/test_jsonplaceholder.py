@@ -9,8 +9,8 @@ def json_api():
 
 @pytest.mark.parametrize("id_num", ["1", "10", "20"])
 def test_get_posts(json_api, id_num):
-    response = json_api.get_data("posts", id_num)
-    assert response.status_code == 200
+    response = json_api.get_data("posts", id_num).json()
+    assert str(response["id"]) == id_num
 
 
 @pytest.mark.parametrize("id_num", ["1", "10", "20"])
