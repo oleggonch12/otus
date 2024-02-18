@@ -3,18 +3,18 @@ import pytest
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--actual", help="Actual value"
+        "--url", help="url"
     )
 
     parser.addoption(
-        "--expected", default=200, type=int, help="Expected value"
+        "--status_code", default=200, type=int, help="status_code"
     )
 
 
 @pytest.fixture
-def actual(request):
-    return request.config.getoption("--actual")
+def url(request):
+    return request.config.getoption("--url")
 
 
-def expected(request):
-    return request.config.getoption("--expected")
+def status_code(request):
+    return request.config.getoption("--status_code")
