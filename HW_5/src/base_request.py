@@ -40,7 +40,10 @@ class BaseRequest:
         return response
 
     def get(self, endpoint, endpoint_id, expected_error=False):
-        url = f'{self.base_url}/{endpoint}/{endpoint_id}'
+        if endpoint_id is None:
+            url = f'{self.base_url}/{endpoint}'
+        else:
+            url = f'{self.base_url}/{endpoint}/{endpoint_id}'
         response = self._request(url, 'GET', expected_error=expected_error)
         return response
 

@@ -1,10 +1,10 @@
 import pytest
-from src.dog_api import DogApi
+from src.api import Api
 
 
 @pytest.fixture(scope='function')
 def pet_api_user():
-    return DogApi("https://dog.ceo/api")
+    return Api("https://dog.ceo/api")
 
 
 @pytest.mark.parametrize("breed", ["breed/african", "breed/doberman", "breed/affenpinscher"])

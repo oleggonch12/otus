@@ -1,7 +1,7 @@
 from .base_request import BaseRequest
 
 
-class DogApi(BaseRequest):
+class Api(BaseRequest):
     def __init__(self, base_url):
         super().__init__(base_url)
 
